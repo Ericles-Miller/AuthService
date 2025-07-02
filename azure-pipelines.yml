@@ -1,0 +1,51 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - main
+
+pr:
+  branches:
+    include:
+      - develop
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  node_version: '22.x'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '$(node_version)'
+    displayName: '🔧 Instalar Node.js'
+
+  - script: |
+      corepack enable
+      yarn install --frozen-lockfile
+    displayName: '📦 Instalar dependências com Yarn'
+
+  - script: |
+      yarn lint
+    displayName: '🧹 Rodar lint'
+
+  - script: |
+      yarn build
+    displayName: '🏗️ Build do projeto'
+
+  - script: |
+      yarn test
+    displayName: '🧪 Rodar testes unitários'
+
+  - script: |
+      yarn test:cov
+    displayName: '📊 Cobertura de testes'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/test-results.xml'
+    condition: succeededOrFailed()
+    displayName: '📝 Publicar resultados de teste'
