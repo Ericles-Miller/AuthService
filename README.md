@@ -96,3 +96,13 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+docker run -e "ACCEPT_EULA=Y" \
+           -e "SA_PASSWORD=SeuSenhaForte123" \
+           -p 1433:1433 \
+           --name sqlserver \
+           -d mcr.microsoft.com/mssql/server:2022-latest
+
+docker exec -it sqlserver /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'SeuSenhaForte123'
+
+CREATE DATABASE nome_do_banco;
+GO
