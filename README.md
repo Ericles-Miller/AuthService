@@ -97,3 +97,42 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
+## Folders structure 
+```
+src/
+  auth/
+    auth.module.ts
+    auth.service.ts
+    auth.controller.ts
+    strategies/
+      google.strategy.ts
+      microsoft.strategy.ts
+      jwt.strategy.ts
+    guards/
+      jwt-auth.guard.ts
+      roles.guard.ts
+    dto/
+      login.dto.ts
+      oauth-login.dto.ts
+    interfaces/
+      user-payload.interface.ts
+    decorators/
+      roles.decorator.ts
+  users/
+    users.module.ts
+    users.service.ts
+    users.controller.ts
+    user.entity.ts
+    dto/
+      create-user.dto.ts
+      update-user.dto.ts
+  common/
+    constants/
+      roles.enum.ts
+    exceptions/
+      unauthorized.exception.ts
+    utils/
+      jwt.utils.ts
+  app.module.ts
+  main.ts
+  ```
